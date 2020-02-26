@@ -1,0 +1,23 @@
+{% extends "main.html" %}
+
+{% block content %}
+Отчет о потерянных клиентах<br>
+    {% for move in moves %}
+        <br>
+        <br>
+        {{ move.shop_name }}    <br>
+        <br>
+        Клиенты, которые покупали сделали больше одной покупки ранее:{{ move.clients_more_than_one|length }}<br>
+        Клиенты, которые покупали 2 месяца подряд до:{{ move.clients_every_month|length }}<br>
+        <br>
+        Потерянные Клиенты, которые покупали сделали больше одной покупки ранее:{{ move.clients_lost_more_than_one|length }}<br>
+        Потерянные Клиенты, которые покупали 2 месяца подряд до:{{ move.clients_lost_every_month|length }}<br>
+        <br>
+        Сохрененные в этом магазине Клиенты, которые покупали сделали больше одной покупки ранее:{{ move.clients_save_in_this_more_than_one|length }}<br>
+        Сохрененные в этом магазине Клиенты, которые покупали 2 месяца подряд до:{{ move.clients_save_in_this_every_month|length }}<br>
+        <br>
+        Сохрененные в другом магазине Клиенты, которые покупали сделали больше одной покупки ранее:{{ move.clients_save_in_other_more_than_one|length }}<br>
+        Сохрененные в другом магазине Клиенты, которые покупали 2 месяца подряд до:{{ move.clients_save_in_other_every_month|length }}<br>
+
+    {% endfor %}
+{% endblock content %}

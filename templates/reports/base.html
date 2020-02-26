@@ -1,0 +1,86 @@
+{% extends "main.html" %}
+
+{% block content %}
+<div class="accordion" id="accordionExample">
+{% for report in reports %}
+  <div class="card">
+    <div class="card-header" id="heading{{ report.id }}">
+      <h2 class="mb-0">
+        <button class="btn btn-dark" type="button" data-toggle="collapse" data-target="#collapse{{ report.id }}" aria-expanded="false" aria-controls="collapse{{ report.id }}">
+              {{ report.datestart }} - {{ report.datefinish }}
+        </button>
+      </h2>
+    </div>
+
+    <div id="collapse{{ report.id }}" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+      <div class="card-body">
+            <table id="example" class="display example-table" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Магазин</th>
+                        <th>Все</th>
+                        <th>>1</th>
+                        <th>>1 + ЛМ</th>
+                        <th>%</th>
+                        <th>1-10</th>
+                        <th>11-20</th>
+                        <th>21-30</th>
+                        <th>31-40</th>
+                        <th>41-50</th>
+                        <th>51-60</th>
+                        <th>61-70</th>
+                        <th>71-80</th>
+                        <th>81-90</th>
+                        <th>91-100</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for shop in report.shop_set.all %}
+                        <tr>
+                            <td align="center flex">
+                                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#Modal{{ shop.id }}">
+                                  {{ shop.name }}
+                                </button>
+                            </td>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="Modal{{ shop.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                              <div class="modal-dialog modal-dialog-scrollable" role="document">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalScrollableTitle">{{ shop.name }}</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                  </div>
+                                  <div class="modal-body">
+                                    {% for s in shop.other_shops_filtered_object %}
+                                        {{ s.name }}: <button class="badge badge-secondary">{{ s.clients }}</button><br>
+                                    {% endfor %}
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <!-- ENDModal -->
+
+                            <td align="center">{{ shop.unique_clients }}</td>
+                            <td align="center">{{ shop.unique_clients_more_one }}</td>
+                            <td align="center">{{ shop.favorite_shop_more_one }}</td>
+                            <td align="center">{{ shop.regular_percent }}</td>
+                            {% for key,value in shop.percents.items %}
+                                <td align="center">{{ value }}</td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+      </div>
+    </div>
+  </div>
+{% endfor %}
+</div>
+
+
+
+{% endblock content %}

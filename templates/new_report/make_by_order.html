@@ -1,0 +1,19 @@
+{% extends "main.html" %}
+
+{% block content %}
+Тут будет список заказов, на основании которых можно сделать отчет.
+{% for order in orders %}
+    <div class="card">
+        {{ order.id }}<br>
+        {{ order.type }}<br>
+        {{ order.create_date }}<br>
+        {{ order.complete }}<br>
+        {{ order.complete_date }}<br>
+        {{ order.parameters }}<br>
+        <form action="/sells/make_report">
+            <input type="hidden" name="id" value="{{ order.id }}">
+            <input type="submit" class="btn btn-dark" value="Посчитать">
+        </form>
+    </div>
+{% endfor %}
+{% endblock content %}

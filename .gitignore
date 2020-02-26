@@ -1,0 +1,6 @@
+.idea
+__pycashe
+venv
+de.sqlite3
+manage.py
+test.py

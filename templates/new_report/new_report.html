@@ -1,0 +1,26 @@
+{% extends "main.html" %}
+
+{% block content %}
+
+        <div class="card col-lg-6 col-sm-12">
+        <label class="btn btn-dark">Форма для заказа базового отчета: </label>
+        <br>
+            <form class="form-group" action="/sells/create_new_order_report">
+                <input type="hidden" class="form-control" name="type" value="base">
+                    <div class="form-row">
+                        <div>
+                            <label for="datestart">Начало периода: </label>
+                            <input id="datestart" type="date" class="form-control" name="datestart"><br>
+                        </div>
+                        <div class="col-lg-1"></div>
+                        <div>
+                            <label for="datefinish">Конец периода: </label>
+                            <input id="datefinish" type="date" class="form-control" name="datefinish"><br>
+                        </div>
+                    </div>
+                <input class="btn btn-dark" type="submit" value="Заказать">
+            </form>
+        </div>
+
+
+{% endblock content %}
