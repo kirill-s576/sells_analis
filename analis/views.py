@@ -41,7 +41,7 @@ def base_report(request):
 
 
 def lost_report(request):
-    date = datetime.datetime.strptime("2019-09-05", '%Y-%m-%d')
+    date = datetime.datetime.strptime("2019-12-01", '%Y-%m-%d')
     shops = Order.objects.all().values_list("shop").distinct()
     shops = [shop[0] for shop in shops]
     moves = []

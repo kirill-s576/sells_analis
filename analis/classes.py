@@ -106,6 +106,15 @@ class MoveReport(object):
         self._lost()
         self._save_in_this()
         self._save_in_other()
+
+        self.percent_more_than_one = int(len(self.clients_more_than_one)/(len(self.clients_before)+1)*100)
+        self.percent_every_month = int(len(self.clients_every_month) / (len(self.clients_before)+1) * 100)
+        self.percent_lost_more_than_one = int(len(self.clients_lost_more_than_one)/(len(self.clients_before)+1)*100)
+        self.percent_lost_every_month = int(len(self.clients_lost_every_month)/(len(self.clients_before)+1)*100)
+        self.percent_save_in_this_more_than_one = int(len(self.clients_save_in_this_more_than_one)/(len(self.clients_before)+1)*100)
+        self.percent_save_in_this_every_month = int(len(self.clients_save_in_this_every_month)/(len(self.clients_before)+1)*100)
+        self.percent_save_in_other_more_then_one = int(len(self.clients_save_in_other_more_than_one)/(len(self.clients_before)+1)*100)
+        self.percent_save_in_other_every_month = int(len(self.clients_save_in_other_every_month) / (len(self.clients_before) + 1) * 100)
         # self._stores()
 
     def _before(self):

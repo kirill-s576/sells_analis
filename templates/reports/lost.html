@@ -2,22 +2,111 @@
 
 {% block content %}
 Отчет о потерянных клиентах<br>
-    {% for move in moves %}
-        <br>
-        <br>
-        {{ move.shop_name }}    <br>
-        <br>
-        Клиенты, которые покупали сделали больше одной покупки ранее:{{ move.clients_more_than_one|length }}<br>
-        Клиенты, которые покупали 2 месяца подряд до:{{ move.clients_every_month|length }}<br>
-        <br>
-        Потерянные Клиенты, которые покупали сделали больше одной покупки ранее:{{ move.clients_lost_more_than_one|length }}<br>
-        Потерянные Клиенты, которые покупали 2 месяца подряд до:{{ move.clients_lost_every_month|length }}<br>
-        <br>
-        Сохрененные в этом магазине Клиенты, которые покупали сделали больше одной покупки ранее:{{ move.clients_save_in_this_more_than_one|length }}<br>
-        Сохрененные в этом магазине Клиенты, которые покупали 2 месяца подряд до:{{ move.clients_save_in_this_every_month|length }}<br>
-        <br>
-        Сохрененные в другом магазине Клиенты, которые покупали сделали больше одной покупки ранее:{{ move.clients_save_in_other_more_than_one|length }}<br>
-        Сохрененные в другом магазине Клиенты, которые покупали 2 месяца подряд до:{{ move.clients_save_in_other_every_month|length }}<br>
+    <div class="card-body">
+            Отчет считает клиентов, которые покупали не более 2 мес назад
+            <table id="example" class="display example-table" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Магазин</th>
+                        <th>Всех</th>
 
-    {% endfor %}
+                        <th>2 мес подряд</th>
+                        <th>%</th>
+                        <th>Потеряли</th>
+                        <th>%</th>
+                        <th>Сохранили здесь</th>
+                        <th>%</th>
+                        <th>Сохранили в другом</th>
+                        <th>%</th>
+
+                        <th>>1 пок.</th>
+                        <th>%</th>
+                        <th>Потеряли</th>
+                        <th>%</th>
+                        <th>Сохранили здесь</th>
+                        <th>%</th>
+                        <th>Сохранили в другом</th>
+                        <th>%</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for move in moves %}
+                        <tr>
+                            <td align="center flex">
+                                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#Modal{{ move.id }}">
+                                  {{ move.shop_name }}
+                                </button>
+                            </td>
+{#                            <!-- Modal -->#}
+{#                            <div class="modal fade" id="Modal{{ move.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">#}
+{#                              <div class="modal-dialog modal-dialog-scrollable" role="document">#}
+{#                                <div class="modal-content">#}
+{#                                  <div class="modal-header">#}
+{#                                    <h5 class="modal-title" id="exampleModalScrollableTitle">{{ shop.name }}</h5>#}
+{#                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">#}
+{#                                      <span aria-hidden="true">&times;</span>#}
+{#                                    </button>#}
+{#                                  </div>#}
+{#                                  <div class="modal-body">#}
+{#                                    {% for s in shop.other_shops_filtered_object %}#}
+{#                                        {{ s.name }}: <button class="badge badge-secondary">{{ s.clients }}</button><br>#}
+{#                                    {% endfor %}#}
+{#                                  </div>#}
+{#                                </div>#}
+{#                              </div>#}
+{#                            </div>#}
+{#                            <!-- ENDModal -->#}
+                            <td align="center">{{ move.clients_before|length }}</td>
+
+
+                            <td align="center">{{ move.clients_more_than_one|length }}</td>
+                            <td align="center">{{ move.percent_more_than_one }}</td>
+
+                            <td align="center">{{ move.clients_lost_more_than_one|length }}</td>
+                            <td align="center">{{ move.percent_lost_more_than_one }}</td>
+
+                            <td align="center">{{ move.clients_save_in_this_more_than_one|length }}</td>
+                            <td align="center">{{ move.percent_save_in_this_more_than_one }}</td>
+
+                            <td align="center">{{ move.clients_save_in_other_more_than_one|length }}</td>
+                            <td align="center">{{ move.percent_save_in_other_more_then_one }}</td>
+
+
+                            <td align="center">{{ move.clients_every_month|length }}</td>
+                            <td align="center">{{ move.percent_every_month }}</td>
+
+                            <td align="center">{{ move.clients_lost_every_month|length }}</td>
+                            <td align="center">{{ move.percent_lost_every_month }}</td>
+
+                            <td align="center">{{ move.clients_save_in_this_every_month|length }}</td>
+                            <td align="center">{{ move.percent_save_in_this_every_month }}</td>
+
+                            <td align="center">{{ move.clients_save_in_other_every_month|length }}</td>
+                            <td align="center">{{ move.percent_save_in_other_every_month }}</td>
+
+
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+      </div>
+{#    {% for move in moves %}#}
+{#        <br>#}
+{#        <br>#}
+{#        {{ move.shop_name }}    <br>#}
+{#        <br>#}
+{#        Клиенты, которые покупали сделали больше одной покупки ранее:{{ move.clients_more_than_one|length }}<br>#}
+{#        Клиенты, которые покупали 2 месяца подряд до:{{ move.clients_every_month|length }}<br>#}
+{#        <br>#}
+{#        Потерянные Клиенты, которые покупали сделали больше одной покупки ранее:{{ move.clients_lost_more_than_one|length }}<br>#}
+{#        Потерянные Клиенты, которые покупали 2 месяца подряд до:{{ move.clients_lost_every_month|length }}<br>#}
+{#        <br>#}
+{#        Сохрененные в этом магазине Клиенты, которые покупали сделали больше одной покупки ранее:{{ move.clients_save_in_this_more_than_one|length }}<br>#}
+{#        Сохрененные в этом магазине Клиенты, которые покупали 2 месяца подряд до:{{ move.clients_save_in_this_every_month|length }}<br>#}
+{#        <br>#}
+{#        Сохрененные в другом магазине Клиенты, которые покупали сделали больше одной покупки ранее:{{ move.clients_save_in_other_more_than_one|length }}<br>#}
+{#        Сохрененные в другом магазине Клиенты, которые покупали 2 месяца подряд до:{{ move.clients_save_in_other_every_month|length }}<br>#}
+{##}
+{#    {% endfor %}#}
 {% endblock content %}
